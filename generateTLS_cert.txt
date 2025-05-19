@@ -1,0 +1,10 @@
+1)https://kubernetes.io/docs/tasks/administer-cluster/certificates/ - for K8s certs
+
+3) Note the CN should be matching with DNS - run on Linux
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=web.k8s.local"
+or
+openssl req -nodes -newkey rsa:2048 -keyout example.key -out example.csr -subj "/C=UA/ST=Kharkov/L=Kharkov/O=Super Secure Company/OU=IT Department/CN=web.k8s.local"
+
+
+4)kubectl create secret tls web-tls --cert=tls.crt --key=tls.key -n <ns>
